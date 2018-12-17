@@ -1,0 +1,6 @@
+build/
+devel/
+.DS_Store
+.vscode/
+frames.pdf
+frames.gv
