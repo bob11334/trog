@@ -18,30 +18,10 @@ ToDo List
 * [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
 
 
-User Guide
-===
-This launches ROS and all necessary nodes. **This must be run before anything.**
+What can Troggie Do?
+========
 
-    # Get robot up and running
-    $ roslaunch trog_bringup bringup.launch
-
-### Teleoperation
-In order to remotely operate Troggie, run the follwing command.  control layout will be displayed to your terminal.
-
-    # Teleop
-    $  rosrun teleop_twist_keyboard teleop_twist_keyboard.py /cmd_vel:=/trog_velocity_controller/cmd_vel
- 
-### Mapping
-To begin mapping. Please refer to `trog_mapping` for more detailed instructions.
-   
-    # Begin mapping
-    $ roslaunch trog_mapping create_map.launch
-
-### Autnomous navigation
-To operate Troggie autonomously within a known map. Please refer to `trog_2dnav` for more detailed instructions.
-
-    # Autonomous navigation within a known map
-    $ roslaunch trog_2dnav known_map.launch
-
-
+Currently, Troggie is capable of indoor and outdoor navigation. Troggie can navigate autonomously ***within known maps***. 
+Meaning, in order to begin autonomous navigation, a map must first be made. Please refer to [trog_bringup](./trog_bringup)
+for more detailed instructions. 
 
