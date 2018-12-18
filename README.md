@@ -25,3 +25,15 @@ Currently, Troggie is capable of indoor and outdoor navigation. Troggie can navi
 Meaning, in order to begin autonomous navigation, a map must first be made. Please refer to [trog_bringup](./ros/src/trog_bringup)
 for more detailed instructions. 
 
+Components
+========
+This is an overview of the key components of Troggie:
+
+- Velodyne VLP-16 LiDAR
+- Jetson TX2 Developer Kit
+- SparkFun 9DoF Razor IMU M0
+- RoboteQ SDC2130 - 2x20A 30V Motor Controller with Encoder Input
+- Garmin 18x GPS
+- Samsung 850 EVO 250GB 2.5-Inch SATA III Internal SSD
+- 24V LiFeMnPO4 Prismatic Battery 100Ah
+- Superdroid IG52-DB4, 4WD All Terrain Heavy Duty Robot Platform (with customized upper deck)
