@@ -22,6 +22,6 @@ What can Troggie Do?
 ========
 
 Currently, Troggie is capable of indoor and outdoor navigation. Troggie can navigate autonomously ***within known maps***. 
-Meaning, in order to begin autonomous navigation, a map must first be made. Please refer to [trog_bringup](./trog_bringup)
+Meaning, in order to begin autonomous navigation, a map must first be made. Please refer to [trog_bringup](./ros/src/trog_bringup)
 for more detailed instructions. 
 
