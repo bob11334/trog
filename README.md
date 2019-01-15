@@ -12,10 +12,11 @@ ToDo List
 * [ ] Configure move_base parameters
 * [ ] Get GPS readings
 
-
 #### Hardware
-* [ ] Get Touch Screen Monitor
 * [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
+* [ ] Connect Encoders
+* [ ] Get Touch Screen Monitor
+
 
 
 What can Troggie Do?
