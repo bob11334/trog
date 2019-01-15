@@ -15,7 +15,7 @@ trog_velocity_controller:
   velocity_rolling_window_size: 2
 
   wheel_separation: 0.85
-  wheel_radius: 0.1065
+  wheel_radius: 0.127
 
   # Base frame_id
   base_frame_id: base_link
@@ -34,7 +34,7 @@ trog_velocity_controller:
   linear:
     x:
       has_velocity_limits    : true
-      max_velocity           : 1.0   # m/s
+      max_velocity           : 0.72  # m/s
       has_acceleration_limits: true
       max_acceleration       : 3.0   # m/s^2
   angular:

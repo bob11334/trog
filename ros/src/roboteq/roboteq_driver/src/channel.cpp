@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace roboteq {
 
 Channel::Channel(int channel_num, std::string ns, Controller* controller) :
-  channel_num_(channel_num), nh_(ns), controller_(controller), max_rpm_(3500),
+  channel_num_(channel_num), nh_(ns), controller_(controller), max_rpm_(65),
   last_mode_(255)
 {
   sub_cmd_ = nh_.subscribe("cmd", 1, &Channel::cmdCallback, this);
@@ -60,16 +60,9 @@ void Channel::cmdCallback(const roboteq_msgs::Command& command)
   if (command.mode == roboteq_msgs::Command::MODE_VELOCITY)
   {
     // Get a -1000 .. 1000 command as a proportion of the maximum RPM.
-    int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0;
-    ROS_DEBUG_STREAM("Commanding " << roboteq_velocity << " velocity to motor driver.");
-      
-    // Get a -1000 .. 1000 command as a proportion of the maximum RPM.
-    // TODO: Uncomment when we have full battery power
-    //int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0; 
-    int roboteq_velocity = (command.setpoint * 150);
-
-    // NOTE: The wiring was inverted for the second channel
-    if(channel_num_ == 1) roboteq_velocity *= -1;
+    ROS_INFO("Command velocity of %.2f", command.setpoint);
+    int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0; 
+    
 
     // Write mode and command to the motor driver.
     controller_->command << "G" << channel_num_ << roboteq_velocity << controller_->send;
@@ -110,6 +103,7 @@ void Channel::feedbackCallback(std::vector<std::string> fields)
   // see mbs/script.mbs for URL and specific page references.
   try
   {
+    msg.channel = boost::lexical_cast<int>(fields[1]);
     msg.motor_current = boost::lexical_cast<float>(fields[2]) / 10;
     msg.commanded_velocity = from_rpm(boost::lexical_cast<double>(fields[3]));
     msg.motor_power = boost::lexical_cast<float>(fields[4]) / 1000.0;

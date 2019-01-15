@@ -8,9 +8,8 @@
 #include "sensor_msgs/JointState.h"
 
 #include <ros/ros.h>
-#include <roboteq_msgs/Command.h>
 #include <roboteq_driver/controller.h>
-
+#include <roboteq_msgs/Feedback.h>
 
 namespace trog_control
 {
@@ -23,14 +22,18 @@ namespace trog_control
       TrogHardware(ros::NodeHandle nh, ros::NodeHandle private_nh);
 
       // Read data from encoders
-      void updateJointsFromHardware();
+      void updateJointsFromHardware(const roboteq_msgs::Feedback& feedback);
 
       // Send commands to roboteq node
       void writeCommandsToHardware();
 
     private:    
 
+      bool uncalibrated[2];
+      
       void registerControlInterfaces();
+
+      roboteq::Controller controller_;
 
       //void limitDifferentialSpeed(double &travel_speed_left, double &travel_speed_right);
 
@@ -39,11 +42,20 @@ namespace trog_control
       // Roboteq motor controller
       ros::Publisher left_motor_pub;
       ros::Publisher right_motor_pub;
+      ros::Subscriber left_feedback_sub;
+      ros::Subscriber right_feedback_sub;
 
       // ROS Control interfaces
       hardware_interface::JointStateInterface joint_state_interface_;
       hardware_interface::VelocityJointInterface velocity_joint_interface_;
 
+
+      void limitDifferentialSpeed(double &diff_speed_left, double &diff_speed_right);
+
+      double linearToAngular(const double &travel) const;
+
+      double angularToLinear(const double &angle) const;
+      
       double polling_timeout_;
 
       /**

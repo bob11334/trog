@@ -1,7 +1,7 @@
 <launch>
-    <arg name="teleop" default="false">
+    <arg name="teleop" default="false"/>
     <arg name="create_map" default="true"/>
-    <arg name="map_name" unless="$(arg create_map)"> <!-- Require map name if create_map is false-->
+    <arg name="map_name" unless="$(arg create_map)"/> <!-- Require map name if create_map is false-->
     <arg name="use_move_base" default="false"/>
 
     <!-- Start control nodes -->

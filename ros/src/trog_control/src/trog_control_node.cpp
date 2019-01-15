@@ -22,7 +22,8 @@ void controlLoop(trog_control::TrogHardware &trog,
   last_time = this_time;
 
   // Process control loop
-  trog.updateJointsFromHardware();
+  // Because of the driver we are using, we have a callback processing feedback @ 25 Hz 
+  // that is updating our ROS control structure (updateJointsFromHardware())
   cm.update(ros::Time::now(), elapsed);
   trog.writeCommandsToHardware();
 }
