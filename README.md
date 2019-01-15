@@ -13,7 +13,7 @@ ToDo List
 * [ ] Get GPS readings
 
 #### Hardware
-* [ ] Connect IMU to Jetson via serial port (using Serial1 not Serial_HARDWARE)
+* [ ] Connect IMU to Jetson via USB hub
 * [ ] Connect Encoders
 * [ ] Get Touch Screen Monitor
 
