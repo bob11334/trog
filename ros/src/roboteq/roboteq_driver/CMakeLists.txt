@@ -1,27 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(roboteq_driver)
 
-find_package(catkin REQUIRED COMPONENTS
-  roboteq_msgs
-  roscpp serial
-  message_generation)
+find_package(catkin REQUIRED COMPONENTS roboteq_msgs roscpp serial)
 
-# Create Feedback service
-add_service_files(
-    FILES
-    
-    Feedback.srv
- )
-
-generate_messages(
-  DEPENDENCIES
-  roboteq_driver
-)
-
-catkin_package(
-  INCLUDE_DIRS include
-)
-
+catkin_package()
 
 # Build and install binary driver.
 include_directories(include ${catkin_INCLUDE_DIRS})

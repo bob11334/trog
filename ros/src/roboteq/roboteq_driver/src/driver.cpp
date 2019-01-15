@@ -25,23 +25,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 #include "roboteq_driver/controller.h"
 #include "roboteq_driver/channel.h"
+
 #include "ros/ros.h"
-#include <ros/callback_queue.h>
+
 
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "driver_node");
-
-  ros::CallbackQueue feedbackQueue;
-
-  // This node handle uses global callback queue
+  ros::init(argc, argv, "~");
   ros::NodeHandle nh("~");
-  // and this one uses a custom queue
-  ros::NodeHandle feedback_nh;
-  // set custom callback queue
-  feedback_nh.setCallbackQueue(&feedbackQueue);
 
-
-  std::string port = "/dev/ttyACM0";
+  std::string port = "/dev/ttyUSB0";
   int32_t baud = 115200;
   nh.param<std::string>("port", port, port);
   nh.param<int32_t>("baud", baud, baud);
@@ -64,27 +56,17 @@ int main(int argc, char **argv) {
     controller.addChannel(new roboteq::Channel(1, "~", &controller));
   } 
 
-  // Establish service
-  ros::ServiceServer service = feedback_nh.advertiseService("get_feedback", &roboteq::Controller::getFeedback, &controller);
-
-  // Attempt to connect and rn.
+  // Attempt to connect and run.
   while (ros::ok()) {
     ROS_DEBUG("Attempting connection to %s at %i baud.", port.c_str(), baud);
     controller.connect();
     if (controller.connected()) {
-      // Process feedback requests on separate thread
-      ros::AsyncSpinner fb_spinner(1, &feedbackQueue);
-      ros::AsyncSpinner global_spinner(1);
-
-      fb_spinner.start();
-      global_spinner.start();
-
+      ros::AsyncSpinner spinner(1);
+      spinner.start();
       while (ros::ok()) {
         controller.spinOnce();
       }
-      fb_spinner.stop();
-      global_spinner.stop();
-      
+      spinner.stop();
     } else {
       ROS_DEBUG("Problem connecting to serial device.");
       ROS_ERROR_STREAM_ONCE("Problem connecting to port " << port << ". Trying again every 1 second.");
