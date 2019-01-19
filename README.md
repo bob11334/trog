@@ -14,7 +14,6 @@ ToDo List
 
 #### Hardware
 * [ ] Connect IMU to Jetson via USB hub
-* [ ] Connect Encoders
 * [ ] Get Touch Screen Monitor
 
 
