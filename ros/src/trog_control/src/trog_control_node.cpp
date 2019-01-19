@@ -14,7 +14,6 @@ void controlLoop(trog_control::TrogHardware &trog,
                  controller_manager::ControllerManager &cm,
                  time_source::time_point &last_time)
 {
-
   // Calculate monotonic time difference
   time_source::time_point this_time = time_source::now();
   boost::chrono::duration<double> elapsed_duration = this_time - last_time;

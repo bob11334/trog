@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace roboteq {
 
 Channel::Channel(int channel_num, std::string ns, Controller* controller) :
-  channel_num_(channel_num), nh_(ns), controller_(controller), max_rpm_(65),
+  channel_num_(channel_num), nh_(ns), controller_(controller), max_rpm_(49),
   last_mode_(255)
 {
   sub_cmd_ = nh_.subscribe("cmd", 1, &Channel::cmdCallback, this);
@@ -60,9 +60,7 @@ void Channel::cmdCallback(const roboteq_msgs::Command& command)
   if (command.mode == roboteq_msgs::Command::MODE_VELOCITY)
   {
     // Get a -1000 .. 1000 command as a proportion of the maximum RPM.
-    ROS_INFO("Command velocity of %.2f", command.setpoint);
     int roboteq_velocity = to_rpm(command.setpoint) / max_rpm_ * 1000.0; 
-    
 
     // Write mode and command to the motor driver.
     controller_->command << "G" << channel_num_ << roboteq_velocity << controller_->send;

@@ -22,7 +22,7 @@ namespace trog_control
   /**
   * Initialize Trog hardware
   */
-  TrogHardware::TrogHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh), private_nh_(private_nh), controller_("/dev/ttyACM0", 115200)
+   TrogHardware::TrogHardware(ros::NodeHandle nh, ros::NodeHandle private_nh): nh_(nh), private_nh_(private_nh), controller_("/dev/ttyACM0", 115200)
   {
     left_motor_pub = nh.advertise<roboteq_msgs::Command>("/left/cmd", 50); //TODO: 50?
     right_motor_pub = nh.advertise<roboteq_msgs::Command>("/right/cmd", 50); //TODO: 50?
@@ -75,7 +75,7 @@ namespace trog_control
 
     roboteq_msgs::Command cmd_right;
     cmd_right.setpoint = diff_speed_right;
-    
+
     //Publish
     left_motor_pub.publish(cmd_left);
     right_motor_pub.publish(cmd_right);
@@ -88,27 +88,7 @@ namespace trog_control
   void TrogHardware::updateJointsFromHardware(const roboteq_msgs::Feedback& feedback)
   { 
     // Update ROS Control structure
-    int ch = feedback.channel - 1;
-
-    // Calibrate encoders
-    if(uncalibrated[ch]) {
-      joints_[ch].position_offset = joints_[ch].position;
-      uncalibrated[ch] = false;
-    }
-
-    double delta = linearToAngular(feedback.measured_position) - joints_[ch].position - joints_[ch].position_offset;
-
-    if(std::abs(delta) < 1.0)
-      {
-	joints_[ch].position += delta;
-      }
-    else
-      {
-	joints_[ch].position_offset += delta;
-	ROS_DEBUG("Dropping overflow measurement from encoder");
-      }
-
-				   
+    int ch = feedback.channel - 1;				   
     joints_[ch].velocity = feedback.measured_velocity;
 
   }
@@ -125,15 +105,5 @@ namespace trog_control
       }
   }
 
-
-  double TrogHardware::linearToAngular(const double &travel) const
-  {
-    return travel / WHEEL_DIAMETER * 2;
-  }
-  
-  double TrogHardware::angularToLinear(const double &angle) const
-  {
-    return angle * WHEEL_DIAMETER * 2;
-  }
   
 }  // namespace trog_base
