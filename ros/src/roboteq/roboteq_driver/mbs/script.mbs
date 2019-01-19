@@ -24,7 +24,7 @@ setconfig(_RWD, 110) ' Watchdog timeout, milliseconds (p195)
 setconfig(_OVL, 350)
 setconfig(_UVL, 100)
 
-for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
+for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++		
 	setconfig(_EMOD, ch, 18)
 	setconfig(_EPPR, ch, 1650)
 	setconfig(_MXRPM, ch, 49)
@@ -32,7 +32,7 @@ for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
 next
 
 top:
-	for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++
+	for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++		
 		' Send feedback for this channel at 25Hz.
 		GoSub PrintFeedback
 	next
@@ -43,7 +43,7 @@ top:
 		GoSub PrintStatus
 		c = 0
 	end if
-	
+
 	wait(19)
 	goto top
 
@@ -60,13 +60,14 @@ PrintFeedback:
 	print(":", getvalue(_TEMP, ch+1))
 	print("\r")
 	Return
-
+	
 PrintStatus:
 	print("&s:", SCRIPT_VER)
 	print(":", getvalue(_FLTFLAG))
 	print(":", getvalue(_STFLAG))
 	print(":", getvalue(_VOLTS, 1))
-	 print(":", getvalue(_VOLTS, 3))
-	 print(":", getvalue(_TEMP, 1))
-	 print("\r")
-	 Return
+	print(":", getvalue(_VOLTS, 3))
+	print(":", getvalue(_TEMP, 1))
+	print("\r")
+	Return
+
