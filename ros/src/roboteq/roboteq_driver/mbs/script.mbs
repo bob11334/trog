@@ -26,8 +26,8 @@ setconfig(_UVL, 100)
 
 for ch = 1 andwhile ch <= MAX_CHANNELS evaluate ch++		
 	setconfig(_EMOD, ch, 18)
-	setconfig(_EPPR, ch, 98)
-	setconfig(_MXRPM, ch, 3500) ' What should max rpms be?
+	setconfig(_EPPR, ch, 1650)
+	setconfig(_MXRPM, ch, 49) ' What should max rpms be?
 	setconfig(_CLERD, ch, 0)
 next
 
