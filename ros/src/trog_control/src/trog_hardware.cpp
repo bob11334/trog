@@ -13,7 +13,6 @@ namespace
   const float WHEEL_DIAMETER = 0.254;
   const double PI  =3.141592653589793238463;
   const float MAX_SPEED = 2.0; // m/s
-
 };
 
 namespace trog_control
@@ -33,9 +32,9 @@ namespace trog_control
 
     registerControlInterfaces();
 
-    // Set true to calibrate encoders
+    // Set to true to reset position offset
     for(int i = 0; i < 2; i++)
-      uncalibrated[i] = true;
+      reset_encoder_[i] = true;
   }
 
   /**
@@ -88,9 +87,20 @@ namespace trog_control
   void TrogHardware::updateJointsFromHardware(const roboteq_msgs::Feedback& feedback)
   { 
     // Update ROS Control structure
-    int ch = feedback.channel - 1;				   
+    int ch = feedback.channel - 1;
+    
+    // Reset Travel Offsets
+    if (reset_encoder_[ch])
+    {
+		joints_[ch].position_offset = feedback.measured_position;
+		reset_encoder_[ch] = false;
+		joints_[ch].velocity = feedback.measured_velocity;	
+		return;
+	}
+	// Update joint structures
+    double delta = feedback.measured_position - joints_[ch].position - joints_[ch].position_offset;
+	joints_[ch].position += delta;
     joints_[ch].velocity = feedback.measured_velocity;
-
   }
 
   

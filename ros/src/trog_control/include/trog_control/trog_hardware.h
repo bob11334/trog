@@ -44,6 +44,9 @@ namespace trog_control
       ros::Publisher right_motor_pub;
       ros::Subscriber left_feedback_sub;
       ros::Subscriber right_feedback_sub;
+      
+      // Calibrating encoders
+      bool reset_encoder_[2]; 
 
       // ROS Control interfaces
       hardware_interface::JointStateInterface joint_state_interface_;

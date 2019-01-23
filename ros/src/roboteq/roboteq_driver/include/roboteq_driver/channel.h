@@ -34,6 +34,8 @@ namespace roboteq_msgs {
 
 namespace roboteq {
 
+  const int ENC_COUNT_PER_REV = 8645;
+  
 class Controller;
 
 class Channel {
@@ -61,27 +63,23 @@ protected:
   }
 
   /**
-   * Conversion of radians to encoder ticks. Note that this assumes a
-   * 1024-line quadrature encoder (hence 4096).
    *
    * @param x Angular position in radians.
    * @return Angular position in encoder ticks.
    */
   static double to_encoder_ticks(double x)
   {
-    return x * 4096 / (2 * M_PI);
+    return x * ENC_COUNT_PER_REV / (2 * M_PI);
   }
 
   /**
-   * Conversion of encoder ticks to radians. Note that this assumes a
-   * 1024-line quadrature encoder (hence 4096).
    *
    * @param x Angular position in encoder ticks.
    * @return Angular position in radians.
    */
   static double from_encoder_ticks(double x)
   {
-    return x * (2 * M_PI) / 4096;
+    return x * (2 * M_PI) / ENC_COUNT_PER_REV;
   }
 
   void cmdCallback(const roboteq_msgs::Command&);
