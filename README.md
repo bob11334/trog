@@ -9,14 +9,11 @@ ToDo List
 ========
 
 #### Software
-* [ ] Configure move_base parameters
+* [ ] Calibrate IMU and fuse with odometry
 * [ ] Get GPS readings
 
 #### Hardware
-* [ ] Connect IMU to Jetson via USB hub
-* [ ] Connect Encoders
 * [ ] Get Touch Screen Monitor
-
 
 
 What can Troggie Do?
