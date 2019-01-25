@@ -5,6 +5,7 @@ raytrace_range: 6.0
 
 #footprint: [[0.25, 0.25], [-0.25, 0.25], [-0.25, -0.25], [0.25, -0.25]]
 footprint: [[0.31, 0.31], [-0.31, 0.31], [-0.31, -0.31], [0.31, -0.31]]
+
 plugins:
   - {name: obstacles, type: "costmap_2d::ObstacleLayer"}
   - {name: inflation, type: "costmap_2d::InflationLayer"}
