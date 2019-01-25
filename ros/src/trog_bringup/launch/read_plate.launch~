@@ -1,0 +1,10 @@
+<launch>
+    <!-- Launch Troggie-->
+    <include file="$(find trog_bringup)/launch/bringup.launch"/>
+
+    <!-- Launch waypoint follower -->
+    <include file="$(follow_waypoints/launch/follow_waypoints.launch"/>
+
+    <!-- Launch rviz -->
+    <node name="rviz" pkg="rviz" type"rviz" args="-d ~/.rviz/plate_reader.rviz/>
+</launch>

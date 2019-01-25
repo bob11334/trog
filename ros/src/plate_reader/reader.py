@@ -31,14 +31,14 @@ def read_plate(_):
     #image_crop.save('tmp.jpg')
     cap = cv2.VideoCapture(0)
     _,img = cap.read()
-    cv2.imwrite('plate.jpg', img)
+    t = int(time.time())
+    cv2.imwrite('plate_{}.jpg'.format(t), img)
     time.sleep(1)
-    with open('plate.jpg', 'rb') as f:
+    with open('plate_{}.jpg'.format(t), 'rb') as f:
         response = requests.post(
             'https://platerecognizer.com/plate-reader/',
             files=dict(upload=f),
             headers={'Authorization': 'Token ' + '6aa8435106c4ce07b0d2608f1057f2fee9630f37'})
-    os.remove('plate.jpg')
     plate_seq = response.json()['results'][0]['plate']
     rospy.loginfo('Read plate: {}'.format(plate_seq))
 
