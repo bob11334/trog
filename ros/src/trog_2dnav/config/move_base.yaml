@@ -1,0 +1,5 @@
+# Recalculate new route
+#planner_frequency: 0.2
+
+global_planner:
+  nuetral_cost: 70

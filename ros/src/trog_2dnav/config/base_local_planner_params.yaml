@@ -1,15 +1,25 @@
 TrajectoryPlannerROS:
   max_vel_x: 0.4
-  min_vel_x: -0.4
-  max_vel_theta: 0.5
+  min_vel_x: -0.2
+  max_vel_theta: 0.25
   min_in_place_vel_theta: 0.2
 
-  acc_lim_theta: 1.0
-  acc_lim_x: 0.5
+  acc_lim_theta: 0.2
+  acc_lim_x: 0.35
   acc_lim_y: 0
 
   holonomic_robot: false
 
-  yaw_goal_tolerance: 4
+  yaw_goal_tolerance: 0.5
   xy_goal_tolerance: 0.2
-  escape_vel: -0.5
+
+  # Keep robot in place when turning around
+  pdist_scale: 3.0
+  gdist_scale: 0.5
+  
+  heading_lookahead: 0.02
+
+  # Keep robot from drastically leaving its path
+  #occdist_scale: 4.0
+
+  meter_scoring: true

@@ -14,7 +14,7 @@ from PIL import Image
 
 from db import Db
 
-db = Db()
+#db = Db()
 
 def read_plate(_):
     cap = cv2.VideoCapture(1)
@@ -24,7 +24,7 @@ def read_plate(_):
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
     cv2.imwrite(os.path.join(save_dir, 'plate_{}.jpg'.format(t)), img)
-    rospy.loginfo('saved image')
+    #rospy.loginfo('saved image')
     time.sleep(1)
     with open('{}/plate_{}.jpg'.format(save_dir, t), 'rb') as f:
         response = requests.post(
@@ -41,7 +41,7 @@ def read_plate(_):
     rospy.loginfo('Read plate: {}'.format(plate_seq))
 
     # Add to db
-    db.add_plate(plate_seq)
+    #db.add_plate(plate_seq)
 
 
 
