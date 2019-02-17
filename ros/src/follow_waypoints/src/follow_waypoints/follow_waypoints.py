@@ -7,7 +7,7 @@ import actionlib
 from smach import State,StateMachine
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from geometry_msgs.msg import PoseWithCovarianceStamped, PoseArray
-from std_msgs.msg import Empty
+from std_msgs.msg import Empty, String
 
 waypoints = []
 
@@ -21,7 +21,7 @@ class FollowPath(State):
         self.client.wait_for_server()
         rospy.loginfo('Connected to move_base.')
         # Notify when to take a readLicensePlate
-        self.readLicensePlate_publisher = rospy.Publisher('/read_plate', Empty, queue_size=1)
+        self.readLicensePlate_publisher = rospy.Publisher('/read_plate', String, queue_size=1)
 
     def execute(self, userdata):
         global waypoints
@@ -43,10 +43,8 @@ class FollowPath(State):
             self.client.wait_for_result()
 
             # Waypoint was reached. Block until plate is read
-            self.readLicensePlate_publisher.publish(Empty())
+            self.readLicensePlate_publisher.publish(String())
             rospy.loginfo('Waiting for plate to be read...')
-            rospy.wait_for_message('/read_plate', String)
-            rospy.logingo('Plate received. Moving to next waypoint.')
             
         return 'success'
 

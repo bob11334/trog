@@ -1,0 +1,4 @@
+<launch>
+  <node name="data_saver" pkg="rosbag" type="record"
+	args="record -o /home/nvidia/trog/ros/data/ /scan /"/>
+</launch>

@@ -9,18 +9,36 @@ frequency: 50
 odom0: trog_velocity_controller/odom
 odom0_config: [false, false, false,
                false, false, false,
-       true, true, false,
-       false, false, true,
-       false, false, false]
-odom0_differential: true
+              true, true, false,# dx, dy
+              false, false, true,# dw
+              false, false, false]
+odom0_differential: false
 odom0_queue_size: 10
 
-imu0: imu/data
-imu0_config: [false, false, false,
-false, false, true,
-false, false, false,
-false, false, true,
-true, false, false]
-imu0_differential: false
-imu0_queue_size: 10
-imu0_remove_gravitational_acceleration: true
+# imu0: imu/data
+# imu0_config: [false, false, false,
+#      false, false, true,
+#      false, false, false,
+#      false, false, true,
+#      true, false, false]
+# imu0_differential: false
+# imu0_queue_size: 10
+# imu0_remove_gravitational_acceleration: true
+
+# imu0_relative: true
+
+# process_noise_covariance: [0.0001, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0.0001, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0, 0.0001, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0,0 , 0.0001, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0.0001, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0.0001, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0.0001, 0, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0.0001, 0, 0, 0, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0, 0, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001, 0,
+#   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.0001]
