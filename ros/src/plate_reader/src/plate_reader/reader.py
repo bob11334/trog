@@ -16,7 +16,7 @@ from db import Db
 
 #db = Db()
 
-def read_plate(_):
+def read_plate(event):
     cap = cv2.VideoCapture(1)
     _,img = cap.read()
     t = int(time.time())
@@ -26,19 +26,19 @@ def read_plate(_):
     cv2.imwrite(os.path.join(save_dir, 'plate_{}.jpg'.format(t)), img)
     #rospy.loginfo('saved image')
     time.sleep(1)
-    with open('{}/plate_{}.jpg'.format(save_dir, t), 'rb') as f:
-        response = requests.post(
-            'https://platerecognizer.com/plate-reader/',
-            files=dict(upload=f),
-            headers={'Authorization': 'Token ' + '6aa8435106c4ce07b0d2608f1057f2fee9630f37'})
-    try:
-        plate_seq = response.json()['results'][0]['plate']
-    except KeyError:
-        return
-    except IndexError:
-        return
+#    with open('{}/plate_{}.jpg'.format(save_dir, t), 'rb') as f:
+        # response = requests.post(
+        #     'https://platerecognizer.com/plate-reader/',
+        #     files=dict(upload=f),
+        #     headers={'Authorization': 'Token ' + '6aa8435106c4ce07b0d2608f1057f2fee9630f37'})
+    # try:
+    #     plate_seq = response.json()['results'][0]['plate']
+    # except KeyError:
+    #     return
+    # except IndexError:
+    #     return
 
-    rospy.loginfo('Read plate: {}'.format(plate_seq))
+ #   rospy.loginfo('Read plate: {}'.format(plate_seq))
 
     # Add to db
     #db.add_plate(plate_seq)
@@ -47,7 +47,12 @@ def read_plate(_):
 
 if __name__ == '__main__':
     rospy.init_node('reader')
-    rospy.Subscriber('/read_plate', String, read_plate)
+
+    # Executes callback on publish event
+    # rospy.Subscriber('/read_plate', String, read_plate)
+
+    # Executes callback every X seconds
+    rospy.Timer(rospy.Duration(1), read_plate)
 
     rospy.loginfo('Starting plate reader node...')
     rospy.spin()

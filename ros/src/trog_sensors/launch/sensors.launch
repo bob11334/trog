@@ -7,8 +7,8 @@
     	  args="0 0 0.7 0 0 0 1 /base_link /laser 50"/>
 
     <!-- IMU -->
-    <include file="$(find razor_imu_9dof)/launch/razor-pub.launch">
-    </include>
+
+
     <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_pre" -->
     <!--       args="0.2 0 0.4 0 0 0 -1 /base_link /pre_imu_link 50" /> -->
     <node pkg="tf" type="static_transform_publisher" name="imu"

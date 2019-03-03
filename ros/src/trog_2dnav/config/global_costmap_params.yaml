@@ -4,25 +4,23 @@ global_costmap:
   update_frequency: 5.0
   static_map: true
   rolling_window: false
-
   width: 400.0
   height: 400.0
-
   origin_x: -200.0
   origin_y: -200.0
-  
   resolution: 0.05
 
   plugins:
     - {name: static, type: "costmap_2d::StaticLayer"}
     - {name: inflation, type: "costmap_2d::InflationLayer"}
 
+  static:
+    map_topic: /map
+    subscribe_to_updates: true
+
   inflation:
-    inflation_radius: 0.20
-
-
+    inflation_radius: 0.45
+  
 global_planner:
-  cost_factor: 0.30
-  neutral_cost: 55
-  use_dijkstra: false
-  orientation_mode: 1
+  cost_factor: 0.55
+  neutral_cost: 77
