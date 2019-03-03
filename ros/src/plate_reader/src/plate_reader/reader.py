@@ -20,7 +20,7 @@ def read_plate(event):
     cap = cv2.VideoCapture(1)
     _,img = cap.read()
     t = int(time.time())
-    save_dir = '../data/{}'.format(datetime.datetime.now().strftime("%Y-%m-%d"))
+    save_dir = '~/data/{}'.format(datetime.datetime.now().strftime("%Y-%m-%d"))
     if not os.path.isdir(save_dir):
         os.makedirs(save_dir)
     cv2.imwrite(os.path.join(save_dir, 'plate_{}.jpg'.format(t)), img)
