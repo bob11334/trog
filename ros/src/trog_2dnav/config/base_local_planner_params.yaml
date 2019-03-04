@@ -25,8 +25,8 @@
 # meter_scoring: true
 
   DWAPlannerROS: 
-    acc_lim_theta: 3.2
-    acc_lim_x: 0.4
+    acc_lim_theta: 10.0
+    acc_lim_x: 10.0
 
     max_vel_x: 1.8
     max_rot_vel: 2.0
