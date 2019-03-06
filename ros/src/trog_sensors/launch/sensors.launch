@@ -1,19 +1,19 @@
 <launch>
     <!-- Velodyne VLP-16 LiDAR -->
     <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
-      <arg name="min_range" value="0.2"/>
-     </include>
+    </include>
     <node pkg="tf" type="static_transform_publisher" name="laser_to_base"
     	  args="0 0 0.7 0 0 0 1 /base_link /laser 50"/>
 
     <!-- IMU -->
-
-
-    <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_pre" -->
-    <!--       args="0.2 0 0.4 0 0 0 -1 /base_link /pre_imu_link 50" /> -->
+    <include file="$(find razor_imu_9dof)/launch/razor-pub.launch"/>
     <node pkg="tf" type="static_transform_publisher" name="imu"
           args="0.2 0 0.3 0 0 0 1 /base_link /base_imu_link 50"/>
+    
     <!-- GPS -->
     <!-- <node name="gps_driver" pkg="nmea_navsat_driver" type="nmea_serial_driver"
-          args="_port:=/dev/ttyUSB0 _baud:=38400"/> -->
+         args="_port:=/dev/ttyUSB0 _baud:=38400"/> -->
+
+    <!-- SONAR -->
+    <!-- TODO: Add sonars -->
 </launch>
