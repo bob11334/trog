@@ -9,11 +9,10 @@ ToDo List
 ========
 
 #### Software
-* [ ] Calibrate IMU and fuse with odometry
 * [ ] Get GPS readings
 
 #### Hardware
-* [ ] Get Touch Screen Monitor
+* [ ] Add Sonars
 
 
 What can Troggie Do?
