@@ -1,4 +1,4 @@
-# Trog
+# Trog 0.1
 Trog is a pilot mobile battery energy storage system that works in integration with the grid to deliver on-demand energy. Trog, or Troggie, is part of [CAEV](http://smartgrid.ucla.edu/CAEV/). Troggie's name is a play on the word troglodyte (i.e. a person who lived in a cave). 
 
 Troggie is pictured [here](documentation/images/troggie.png). A demonstration video can be seen [here](https://www.youtube.com/watch?v=KBPcC1sAmNI&feature=youtu.be)
