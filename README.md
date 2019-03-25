@@ -8,9 +8,6 @@ Troggie is pictured [here](documentation/images/troggie.png). A demonstration vi
 ToDo List
 ========
 
-#### Software
-* [ ] Get GPS readings
-
 #### Hardware
 * [ ] Add Sonars
 
