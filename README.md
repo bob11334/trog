@@ -9,7 +9,7 @@ ToDo List
 ========
 
 #### Hardware
-* [ ] Add Sonars
+* [ X] Add Sonars
 
 
 What can Troggie Do?
